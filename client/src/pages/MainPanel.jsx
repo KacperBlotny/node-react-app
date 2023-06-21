@@ -12,6 +12,9 @@ function MainPanel() {
         <li>
           <Link to='/changehours'>Change Hours</Link>
         </li>
+        <li>
+          <Link to='/register'>Register</Link>
+        </li>
       </ul>
       <LogOutButton />
     </div>

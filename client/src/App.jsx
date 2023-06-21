@@ -4,6 +4,7 @@ import MainPanel from './pages/MainPanel'
 import Login from './pages/Login'
 import DisplayHours from './components/DisplayHours'
 import ChangeHours from './components/ChangeHours'
+import Register from './components/Register'
 // import { FeedbackProvider } from './context/FeedbackContext'
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
             <Route path='/login' element={<Login />} />
             <Route path='/displayhours' element={<DisplayHours />} />
             <Route path='/changehours' element={<ChangeHours />} />
+            <Route path='/register' element={<Register />} />
           </Routes>
         </div>
       </div>
