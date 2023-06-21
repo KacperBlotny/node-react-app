@@ -1,4 +1,6 @@
 DROP TABLE Users;
+DROP TABLE Activities;
+
 CREATE TABLE Users (
   UserID SERIAL PRIMARY KEY,
   Name VARCHAR(50),
@@ -26,13 +28,18 @@ VALUES (
     'employee',
     'kwachowski@edu.cdv.pl'
   );
+
 SELECT *
 FROM Users;
--- workingHours TABLE
-CREATE TABLE workingHours (
-  UserID INT PRIMARY KEY,
+-- Activities
+CREATE TABLE Activities (
+  ActivityID SERIAL PRIMARY KEY,
+  UserID INT,
+	name varchar(50),
   Date DATE,
   StartTime TIME,
-  EndTime TIME
+  EndTime TIME,
+  FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
--- querie
+
+SELECT * FROM Activities;

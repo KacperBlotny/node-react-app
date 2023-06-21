@@ -1,7 +1,7 @@
-const asyncHandler = require('express-async-handler');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const { client } = require('../databasepg');
+const asyncHandler = require("express-async-handler");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const { client } = require("../databasepg");
 
 // @desc  Register a new user
 // /api/users
@@ -13,18 +13,18 @@ const registerUser = asyncHandler(async (req, res) => {
   // Validation
   if (!name || !email || !password) {
     res.status(400);
-    throw new Error('Please include all fields');
+    throw new Error("Please include all fields");
   }
 
   try {
     // Find if user already exists
-    const query = 'SELECT * FROM users WHERE email = $1';
+    const query = "SELECT * FROM users WHERE email = $1";
     const values = [email];
     const result = await client.query(query, values);
 
     if (result.rows.length > 0) {
       res.status(400);
-      throw new Error('User already exists');
+      throw new Error("User already exists");
     }
 
     // Hash the password
@@ -33,7 +33,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
     // Add to database
     const insertQuery =
-      'INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING userid';
+      "INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING userid";
     const insertValues = [name, email, hashedPassword];
     const insertResult = await client.query(insertQuery, insertValues);
 
@@ -57,7 +57,7 @@ const loginUser = asyncHandler(async (req, res) => {
 
   try {
     // Find if user already exists
-    const query = 'SELECT * FROM users WHERE email = $1';
+    const query = "SELECT * FROM users WHERE email = $1";
     const values = [email];
     const result = await client.query(query, values);
 
@@ -73,7 +73,7 @@ const loginUser = asyncHandler(async (req, res) => {
       });
     } else {
       res.status(400);
-      throw new Error('Invalid credentials');
+      throw new Error("Invalid credentials");
     }
 
     res.status(201).json({
@@ -100,9 +100,41 @@ const getMe = asyncHandler(async (req, res) => {
   res.status(200).json(user);
 });
 
+// @desc  Edit user
+// /api/users
+// @access Private
+const editUser = asyncHandler(async (req, res) => {
+  const { userid, name, email } = req.body;
+  try {
+    const query = "UPDATE users SET name = $1,  email = $2 WHERE userid = $3";
+    const values = [name, email, userid];
+    await client.query(query, values);
+    res.status(200).json({ message: "User updated successfully" });
+  } catch (error) {
+    res.status(400);
+    throw new Error(error);
+  }
+});
+
+// @desc  Delete user
+// /api/users
+// @access Private
+
+const deleteUser = asyncHandler(async (req, res) => {
+  try {
+    const query = "DELETE FROM users WHERE userid = $1";
+    const values = [req.body.userid];
+    await client.query(query, values);
+    res.status(200).json({ message: "User deleted successfully" });
+  } catch (error) {
+    res.status(400);
+    throw new Error(error);
+  }
+});
+
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
-    expiresIn: '1d',
+    expiresIn: "1d",
   });
 };
 
@@ -110,4 +142,6 @@ module.exports = {
   registerUser,
   loginUser,
   getMe,
+  editUser,
+  deleteUser,
 };
