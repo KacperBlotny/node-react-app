@@ -13,6 +13,9 @@ function MainPanel() {
           <Link to='/changehours'>Change Hours</Link>
         </li>
         <li>
+          <Link to='/changehours'>Add activities</Link>
+        </li>
+        <li>
           <Link to='/register'>Register</Link>
         </li>
       </ul>

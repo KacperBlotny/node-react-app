@@ -5,6 +5,7 @@ import Login from './pages/Login'
 import DisplayHours from './components/DisplayHours'
 import ChangeHours from './components/ChangeHours'
 import Register from './components/Register'
+import Addactivities from './components/Addactivities'
 // import { FeedbackProvider } from './context/FeedbackContext'
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
             <Route path='/displayhours' element={<DisplayHours />} />
             <Route path='/changehours' element={<ChangeHours />} />
             <Route path='/register' element={<Register />} />
+            <Route path='/addactivities' element={<Addactivities />} />
           </Routes>
         </div>
       </div>

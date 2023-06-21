@@ -7,7 +7,7 @@ function Login() {
   const navigate = useNavigate()
 
   const [formData, setFormData] = useState({
-    name: '',
+    email: '',
     password: '',
   })
 
@@ -21,13 +21,13 @@ function Login() {
   const onSubmit = async (e) => {
     e.preventDefault()
     try {
+      console.log(formData)
       const response = await axios.post(
         'http://localhost:4001/api/users/login',
         formData
       )
-      console.log('haloooo')
+
       console.log(response.data)
-      console.log(response.data.token)
       localStorage.setItem('token', response.data.token)
 
       navigate('/MainPanel')
@@ -41,11 +41,11 @@ function Login() {
       <ul>
         <li className='p-4'>
           <input
-            type='text'
-            placeholder='Imie'
-            id='name'
+            type='email'
+            placeholder='Email'
+            id='email'
             onChange={onChange}
-            value={formData.name}
+            value={formData.email}
           />
         </li>
         <li className='p-4'>
