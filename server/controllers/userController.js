@@ -132,6 +132,37 @@ const deleteUser = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc  Get Users
+// /api/users
+// @access Private
+
+const getUsers = asyncHandler(async (req, res) => {
+  try {
+    const query = "SELECT * FROM Users";
+    const result = await client.query(query);
+    res.status(200).json(result.rows);
+  } catch (error) {
+    res.status(400);
+    throw new Error(error);
+  }
+});
+
+// @desc  Get activity
+// /api/users/user
+// @access Private
+
+const getUser = asyncHandler(async (req, res) => {
+  try {
+    const query = "SELECT * FROM Users WHERE userid = $1";
+    const values = [req.body.userid];
+    const result = await client.query(query, values);
+    res.status(200).json(result.rows[0]);
+  } catch (error) {
+    res.status(400);
+    throw new Error(error);
+  }
+});
+
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
     expiresIn: "1d",
@@ -144,4 +175,6 @@ module.exports = {
   getMe,
   editUser,
   deleteUser,
+  getUser,
+  getUsers,
 };
