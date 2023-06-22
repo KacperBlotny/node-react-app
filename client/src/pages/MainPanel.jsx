@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom'
 import LogOutButton from '../components/LogOutButton'
 
+// import { useState, useEffect } from 'react';
+// import axios from 'axios'
+
 function MainPanel() {
   return (
     <div>
@@ -13,7 +16,7 @@ function MainPanel() {
           <Link to='/changehours'>Change Hours</Link>
         </li>
         <li>
-          <Link to='/changehours'>Add activities</Link>
+          <Link to='/addactivities'>Add activities</Link>
         </li>
         <li>
           <Link to='/register'>Register</Link>

@@ -30,11 +30,12 @@ function Login() {
       console.log(response.data)
       localStorage.setItem('token', response.data.token)
 
-      navigate('/MainPanel')
+      navigate('/')
     } catch (error) {
       console.log(error)
     }
   }
+
   return (
     <div>
       <div>Login into System</div>
@@ -61,7 +62,7 @@ function Login() {
           <button onClick={onSubmit}>Wyslij</button>
         </li>
       </ul>
-      <Link to='/MainPanel'>
+      <Link to='/mainpanel'>
         <button className='p-2 m-4'>Log in</button>
       </Link>
     </div>

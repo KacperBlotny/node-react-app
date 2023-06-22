@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Header from './components/Header'
+import CurrentUser from './components/CurrentUser'
 import MainPanel from './pages/MainPanel'
 import Login from './pages/Login'
 import DisplayHours from './components/DisplayHours'
@@ -12,6 +13,8 @@ function App() {
   return (
     <Router>
       <Header />
+      <CurrentUser />
+
       <div className='container w-screen'>
         <div className='w-96 flex mx-auto'>
           <Routes>
@@ -19,11 +22,12 @@ function App() {
               path='/'
               element={
                 <>
-                  <Login />
+                  <MainPanel />
                 </>
               }
             ></Route>
 
+            <Route path='/login' element={<Login />} />
             <Route path='/mainpanel' element={<MainPanel />} />
             <Route path='/login' element={<Login />} />
             <Route path='/displayhours' element={<DisplayHours />} />
