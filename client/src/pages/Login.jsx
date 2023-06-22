@@ -3,7 +3,11 @@ import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import axios from 'axios'
 
+import { useContext } from 'react'
+import { UserContext } from '../../UserContext'
+
 function Login() {
+  const { value, setValue } = useContext(UserContext)
   const navigate = useNavigate()
 
   const [formData, setFormData] = useState({
@@ -29,13 +33,12 @@ function Login() {
 
       console.log(response.data)
       localStorage.setItem('token', response.data.token)
-
+      setValue(response.data)
       navigate('/')
     } catch (error) {
       console.log(error)
     }
   }
-
   return (
     <div>
       <div>Login into System</div>

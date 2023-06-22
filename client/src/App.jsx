@@ -7,36 +7,44 @@ import DisplayHours from './components/DisplayHours'
 import ChangeHours from './components/ChangeHours'
 import Register from './components/Register'
 import Addactivities from './components/Addactivities'
+import DeleteUser from './components/DeleteUser'
+import { useState } from 'react'
+import { UserContext } from '../UserContext'
 // import { FeedbackProvider } from './context/FeedbackContext'
 
 function App() {
+  const [value, setValue] = useState({ name: 'Log in please' })
+
   return (
     <Router>
-      <Header />
-      <CurrentUser />
+      <UserContext.Provider value={{ value, setValue }}>
+        <Header />
+        <CurrentUser />
 
-      <div className='container w-screen'>
-        <div className='w-96 flex mx-auto'>
-          <Routes>
-            <Route
-              path='/'
-              element={
-                <>
-                  <MainPanel />
-                </>
-              }
-            ></Route>
+        <div className='container w-screen'>
+          <div className='w-96 flex mx-auto'>
+            <Routes>
+              <Route
+                path='/'
+                element={
+                  <>
+                    <MainPanel />
+                  </>
+                }
+              ></Route>
 
-            <Route path='/login' element={<Login />} />
-            <Route path='/mainpanel' element={<MainPanel />} />
-            <Route path='/login' element={<Login />} />
-            <Route path='/displayhours' element={<DisplayHours />} />
-            <Route path='/changehours' element={<ChangeHours />} />
-            <Route path='/register' element={<Register />} />
-            <Route path='/addactivities' element={<Addactivities />} />
-          </Routes>
+              <Route path='/login' element={<Login />} />
+              <Route path='/mainpanel' element={<MainPanel />} />
+              <Route path='/login' element={<Login />} />
+              <Route path='/displayhours' element={<DisplayHours />} />
+              <Route path='/changehours' element={<ChangeHours />} />
+              <Route path='/register' element={<Register />} />
+              <Route path='/addactivities' element={<Addactivities />} />
+              <Route path='/deleteuser' element={<DeleteUser />} />
+            </Routes>
+          </div>
         </div>
-      </div>
+      </UserContext.Provider>
     </Router>
   )
 }

@@ -13,10 +13,10 @@ function MainPanel() {
           <Link to='/displayhours'>Display Hours</Link>
         </li>
         <li>
-          <Link to='/changehours'>Change Hours</Link>
+          <Link to='/addactivities'>Add activities</Link>
         </li>
         <li>
-          <Link to='/addactivities'>Add activities</Link>
+          <Link to='/deleteuser'>Delete User</Link>
         </li>
         <li>
           <Link to='/register'>Register</Link>
