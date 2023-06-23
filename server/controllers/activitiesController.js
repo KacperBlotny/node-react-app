@@ -76,6 +76,7 @@ const deleteActivity = asyncHandler(async (req, res) => {
 
 const getActivities = asyncHandler(async (req, res) => {
   try {
+    console.log("x");
     const query = "SELECT * FROM Activities";
     const result = await client.query(query);
     res.status(200).json(result.rows);
