@@ -8,7 +8,7 @@ const { client } = require("../databasepg");
 // @access Private
 
 const registerUser = asyncHandler(async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password, role } = req.body;
 
   // Validation
   if (!name || !email || !password) {
@@ -33,14 +33,15 @@ const registerUser = asyncHandler(async (req, res) => {
 
     // Add to database
     const insertQuery =
-      "INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING userid";
-    const insertValues = [name, email, hashedPassword];
+      "INSERT INTO users (name, email, password, role) VALUES ($1, $2, $3, $4) RETURNING userid";
+    const insertValues = [name, email, hashedPassword, role];
     const insertResult = await client.query(insertQuery, insertValues);
 
     res.status(201).json({
       userID: insertResult.rows[0].userid,
       name: name,
       email: email,
+      role: role,
       token: generateToken(insertResult.rows[0].userid),
     });
   } catch (error) {
