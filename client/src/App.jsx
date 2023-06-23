@@ -1,20 +1,20 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import Header from './components/Header'
-import CurrentUser from './components/CurrentUser'
-import MainPanel from './pages/MainPanel'
-import Login from './pages/Login'
-import DisplayHours from './components/DisplayHours'
-import ChangeHours from './components/ChangeHours'
-import Register from './components/Register'
-import Addactivities from './components/Addactivities'
-import DeleteUser from './components/DeleteUser'
-import EditUser from './components/EditUser'
-import { useState } from 'react'
-import { UserContext } from '../UserContext'
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Header from "./components/Header";
+import CurrentUser from "./components/CurrentUser";
+import MainPanel from "./pages/MainPanel";
+import Login from "./pages/Login";
+import DisplayHours from "./components/DisplayHours";
+import ChangeHours from "./components/ChangeHours";
+import Register from "./components/Register";
+import Addactivities from "./components/Addactivities";
+import DeleteUser from "./components/DeleteUser";
+import EditUser from "./components/EditUser";
+import { useState } from "react";
+import { UserContext } from "../UserContext";
 // import { FeedbackProvider } from './context/FeedbackContext'
 
 function App() {
-  const [value, setValue] = useState({ name: 'Log in please' })
+  const [value, setValue] = useState({ name: "Log in please", role: "" });
 
   return (
     <Router>
@@ -22,11 +22,11 @@ function App() {
         <Header />
         <CurrentUser />
 
-        <div className='container w-screen'>
-          <div className='w-96 flex mx-auto'>
+        <div className="container w-screen">
+          <div className="w-96 flex mx-auto">
             <Routes>
               <Route
-                path='/'
+                path="/"
                 element={
                   <>
                     <MainPanel />
@@ -34,24 +34,24 @@ function App() {
                 }
               ></Route>
 
-              <Route path='/login' element={<Login />} />
-              <Route path='/mainpanel' element={<MainPanel />} />
-              <Route path='/login' element={<Login />} />
-              <Route path='/displayhours' element={<DisplayHours />} />
-              <Route path='/changehours' element={<ChangeHours />} />
-              <Route path='/register' element={<Register />} />
-              <Route path='/addactivities' element={<Addactivities />} />
-              <Route path='/deleteuser' element={<DeleteUser />} />
-              <Route path='/edituser' element={<EditUser />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/mainpanel" element={<MainPanel />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/displayhours" element={<DisplayHours />} />
+              <Route path="/changehours" element={<ChangeHours />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/addactivities" element={<Addactivities />} />
+              <Route path="/deleteuser" element={<DeleteUser />} />
+              <Route path="/edituser" element={<EditUser />} />
             </Routes>
           </div>
         </div>
       </UserContext.Provider>
     </Router>
-  )
+  );
 }
 
-export default App
+export default App;
 
 // import { useState } from 'react'
 // import './App.css'

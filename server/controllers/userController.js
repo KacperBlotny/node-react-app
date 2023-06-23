@@ -57,7 +57,6 @@ const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    // Find if user already exists
     const query = "SELECT * FROM users WHERE email = $1";
     const values = [email];
     const result = await client.query(query, values);
@@ -70,19 +69,13 @@ const loginUser = asyncHandler(async (req, res) => {
         userID: user.userid,
         name: user.name,
         email: user.email,
+        role: user.role,
         token: generateToken(user.userid),
       });
     } else {
       res.status(400);
       throw new Error("Invalid credentials");
     }
-
-    res.status(201).json({
-      userID: insertResult.rows[0].userid,
-      name: name,
-      email: email,
-      token: generateToken(insertResult.rows[0].userid),
-    });
   } catch (error) {
     res.status(400);
     throw new Error(error);

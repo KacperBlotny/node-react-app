@@ -1,3 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 
-export const useAuthStatus = () => {};
+export const useAuthStatus = () => {
+  const [loggedIn, setLoggedIn] = useState(false);
+};
