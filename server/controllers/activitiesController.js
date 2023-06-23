@@ -70,8 +70,41 @@ const deleteActivity = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc  Get activities
+// /api/activity
+// @access Private
+
+const getActivities = asyncHandler(async (req, res) => {
+  try {
+    const query = "SELECT * FROM Activities";
+    const result = await client.query(query);
+    res.status(200).json(result.rows);
+  } catch (error) {
+    res.status(400);
+    throw new Error(error);
+  }
+});
+
+// @desc  Get activity
+// /api/activities/activity
+// @access Private
+
+const getActivity = asyncHandler(async (req, res) => {
+  try {
+    const query = "SELECT * FROM Activities WHERE activityid = $1";
+    const values = [req.body.activityid];
+    const result = await client.query(query, values);
+    res.status(200).json(result.rows[0]);
+  } catch (error) {
+    res.status(400);
+    throw new Error(error);
+  }
+});
+
 module.exports = {
   registerActivity,
   editActivity,
   deleteActivity,
+  getActivities,
+  getActivity,
 };
