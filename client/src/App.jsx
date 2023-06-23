@@ -8,6 +8,7 @@ import ChangeHours from './components/ChangeHours'
 import Register from './components/Register'
 import Addactivities from './components/Addactivities'
 import DeleteUser from './components/DeleteUser'
+import EditUser from './components/EditUser'
 import { useState } from 'react'
 import { UserContext } from '../UserContext'
 // import { FeedbackProvider } from './context/FeedbackContext'
@@ -41,6 +42,7 @@ function App() {
               <Route path='/register' element={<Register />} />
               <Route path='/addactivities' element={<Addactivities />} />
               <Route path='/deleteuser' element={<DeleteUser />} />
+              <Route path='/edituser' element={<EditUser />} />
             </Routes>
           </div>
         </div>

@@ -22,6 +22,10 @@ function Register() {
 
   const onSubmit = async (e) => {
     e.preventDefault()
+    if (formData.role === '') {
+      formData.role = 'employee'
+    }
+
     try {
       const response = await axios.post(
         'http://localhost:4001/api/users',
@@ -60,15 +64,6 @@ function Register() {
           />
         </li>
         <li className='p-4'>
-          <input
-            type='text'
-            placeholder='Rola'
-            id='role'
-            onChange={onChange}
-            value={formData.role}
-          />
-        </li>
-        {/* <li className='p-4'>
           <select
             type='text'
             placeholder='Rola'
@@ -76,11 +71,11 @@ function Register() {
             onChange={onChange}
             value={formData.role}
           >
-            <option value='CEO'>CEO</option>
-            <option value='manager'>manager</option>
             <option value='employee'>employee</option>
+            <option value='manager'>manager</option>
+            <option value='CEO'>CEO</option>
           </select>
-        </li> */}
+        </li>
         <li className='p-4'>
           <input
             type='password'
