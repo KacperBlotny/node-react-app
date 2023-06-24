@@ -13,7 +13,7 @@ const { protect } = require("../middleware/authMiddleware");
 router.post("/", protect, registerActivity);
 router.put("/", protect, editActivity);
 router.delete("/", protect, deleteActivity);
-router.get("/", getActivities);
-router.get("/activity", getActivity);
+router.get("/", protect, getActivities);
+router.get("/activity", protect, getActivity);
 
 module.exports = router;

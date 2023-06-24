@@ -117,6 +117,7 @@ const editUser = asyncHandler(async (req, res) => {
 const deleteUser = asyncHandler(async (req, res) => {
   try {
     const query = "DELETE FROM users WHERE userid = $1";
+    console.log(req.body);
     const values = [req.body.userid];
     await client.query(query, values);
     res.status(200).json({ message: "User deleted successfully" });

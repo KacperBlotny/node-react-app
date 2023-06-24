@@ -11,6 +11,7 @@ import DeleteUser from "./components/DeleteUser";
 import EditUser from "./components/EditUser";
 import { useState } from "react";
 import { UserContext } from "../UserContext";
+import PrivateRoute from "./components/PrivateRoute";
 // import { FeedbackProvider } from './context/FeedbackContext'
 
 function App() {
@@ -39,6 +40,9 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/displayhours" element={<DisplayHours />} />
               <Route path="/changehours" element={<ChangeHours />} />
+              {/* <Route path="/register" element={<PrivateRoute />}>
+                <Route path="/register" element={<Register />} />
+              </Route> */}
               <Route path="/register" element={<Register />} />
               <Route path="/addactivities" element={<Addactivities />} />
               <Route path="/deleteuser" element={<DeleteUser />} />

@@ -21,12 +21,10 @@ app.get("/", (request, response) => {
   response.json({ info: "Projekt zaliczeniowy TI" });
 });
 
-app.use("/api/users", require("./routes/userRoutes"));
-app.use("/api/activities", require("./routes/activitiesRoutes"));
-
 app.post(
   "/api/validate",
   asyncHandler((req, res) => {
+    //console.log(req.headers);
     const token = req.headers.authorization.split(" ")[1];
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
@@ -36,6 +34,9 @@ app.post(
     }
   })
 );
+
+app.use("/api/users", require("./routes/userRoutes"));
+app.use("/api/activities", require("./routes/activitiesRoutes"));
 
 app.listen(
   PORT,
