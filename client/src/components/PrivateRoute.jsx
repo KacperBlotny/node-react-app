@@ -1,12 +1,12 @@
-import { Outlet, Navigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import { useAuthStatus } from "../hooks/useAuthStatus";
 
-// Jeszcze nie działa
+const PrivateRoute = () => {
+  const { loggedIn, checkingStatus } = useAuthStatus();
 
-function PrivateRoute() {
-  const loggedIn = useAuthStatus();
-
+  if (checkingStatus) {
+    return <h1>Spinner</h1>;
+  }
   return loggedIn ? <Outlet /> : <Navigate to="/login" />;
-}
-
+};
 export default PrivateRoute;

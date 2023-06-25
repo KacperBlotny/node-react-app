@@ -36,17 +36,17 @@ function App() {
               ></Route>
 
               <Route path="/login" element={<Login />} />
-              <Route path="/mainpanel" element={<MainPanel />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/displayhours" element={<DisplayHours />} />
-              <Route path="/changehours" element={<ChangeHours />} />
-              {/* <Route path="/register" element={<PrivateRoute />}>
+
+              <Route path="/register" element={<PrivateRoute />}>
                 <Route path="/register" element={<Register />} />
-              </Route> */}
-              <Route path="/register" element={<Register />} />
-              <Route path="/addactivities" element={<Addactivities />} />
-              <Route path="/deleteuser" element={<DeleteUser />} />
-              <Route path="/edituser" element={<EditUser />} />
+                <Route path="/mainpanel" element={<MainPanel />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/displayhours" element={<DisplayHours />} />
+                <Route path="/changehours" element={<ChangeHours />} />
+                <Route path="/addactivities" element={<Addactivities />} />
+                <Route path="/deleteuser" element={<DeleteUser />} />
+                <Route path="/edituser" element={<EditUser />} />
+              </Route>
             </Routes>
           </div>
         </div>
