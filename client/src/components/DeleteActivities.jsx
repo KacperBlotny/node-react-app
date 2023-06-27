@@ -1,14 +1,12 @@
 import { Link } from 'react-router-dom'
-import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import axios from 'axios'
 
-function DeleteUser() {
-  const navigate = useNavigate()
+function DeleteActivities() {
   const token = localStorage.getItem('token') || null
 
   const [formData, setFormData] = useState({
-    userid: '',
+    activityid: '',
   })
 
   const onChange = (e) => {
@@ -24,7 +22,7 @@ function DeleteUser() {
       console.log(formData)
       console.log(token)
       const response = await axios.delete(
-        'http://localhost:4001/api/users',
+        'http://localhost:4001/api/activities',
         formData,
         {
           config: {
@@ -36,7 +34,6 @@ function DeleteUser() {
       )
 
       console.log(response.data)
-      navigate('/')
     } catch (error) {
       console.log(error)
     }
@@ -44,14 +41,14 @@ function DeleteUser() {
   return (
     <>
       <div className='w-1/5'>
-        <div>Delete user</div>
+        <div>Delete activity</div>
         <div className='py-2'>
           <input
             type='text'
-            placeholder='Input id to delete'
-            id='userid'
+            placeholder='Input activity id'
+            id='activityid'
             onChange={onChange}
-            value={formData.userid}
+            value={formData.activityid}
             className='p-2 w-full'
           />
         </div>
@@ -59,7 +56,7 @@ function DeleteUser() {
           onClick={onSubmit}
           className='w-full text-rose-500 hover:border-rose-500'
         >
-          Delete user
+          Delete activity
         </button>
         <div>
           <Link to='/'>
@@ -71,4 +68,4 @@ function DeleteUser() {
   )
 }
 
-export default DeleteUser
+export default DeleteActivities

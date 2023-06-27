@@ -1,18 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react'
 
 export const useAuthStatus = () => {
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [checkingStatus, setcheckingStatus] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false)
+  const [checkingStatus, setcheckingStatus] = useState(true)
 
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem('token')
 
   useEffect(() => {
     if (token) {
-      setLoggedIn(true);
+      setLoggedIn(true)
     } else {
-      setLoggedIn(false);
+      setLoggedIn(false)
     }
-    setcheckingStatus(false);
-  }, [token]);
-  return { loggedIn, checkingStatus };
-};
+    setcheckingStatus(false)
+  }, [token])
+  return { loggedIn, checkingStatus }
+}

@@ -1,17 +1,16 @@
 import { Link } from 'react-router-dom'
-// import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import axios from 'axios'
 
-function Addactivities() {
-  // const navigate = useNavigate()
+function EditActivity() {
   const token = localStorage.getItem('token')
 
   const [formData, setFormData] = useState({
     userid: '',
+    name: '',
     startTime: '',
     endTime: '',
-    name: '',
+    activityid: '',
   })
 
   const onChange = (e) => {
@@ -20,40 +19,43 @@ function Addactivities() {
       [e.target.id]: e.target.value,
     }))
   }
-
   const onSubmit = async (e) => {
     e.preventDefault()
-    // if (formData.name === '') {
-    //   formData.name = 'Work task'
-    // }
-    console.log('Data sent: ', formData)
     try {
-      const config = {
-        headers: {
-          Authorization: 'Bearer ' + token,
-        },
-      }
-      const response = await axios.post(
+      console.log(formData)
+      const response = await axios.put(
         'http://localhost:4001/api/activities',
         formData,
-        config
+        {
+          headers: {
+            Authorization: 'Bearer ' + token,
+          },
+        }
       )
-      console.log('Data successfully posted: ', response.data)
 
-      // navigate('/MainPanel')
+      console.log(response.data)
     } catch (error) {
       console.log(error)
     }
   }
-
   return (
     <div className='w-1/5'>
-      <h2>Register new activity</h2>
+      <div>Edit activity</div>
       <ul>
+        <li className='py-2 pb-8'>
+          <input
+            type='text'
+            placeholder='Input activity id to edit'
+            id='activityid'
+            onChange={onChange}
+            value={formData.activityid}
+            className='p-2 w-full'
+          />
+        </li>
         <li className='py-2'>
           <input
             type='text'
-            placeholder='User Id'
+            placeholder='Input user id to edit'
             id='userid'
             onChange={onChange}
             value={formData.userid}
@@ -63,7 +65,17 @@ function Addactivities() {
         <li className='py-2'>
           <input
             type='text'
-            placeholder='Start time'
+            placeholder='Name'
+            id='name'
+            onChange={onChange}
+            value={formData.name}
+            className='p-2 w-full'
+          />
+        </li>
+        <li className='py-2'>
+          <input
+            type='text'
+            placeholder='Start Time'
             id='startTime'
             onChange={onChange}
             value={formData.startTime}
@@ -73,39 +85,27 @@ function Addactivities() {
         <li className='py-2'>
           <input
             type='text'
-            placeholder='End Time'
+            placeholder='End time'
             id='endTime'
             onChange={onChange}
             value={formData.endTime}
             className='p-2 w-full'
           />
         </li>
-        <li className='py-2'>
-          <input
-            type='text'
-            placeholder='Task name'
-            id='name'
-            onChange={onChange}
-            value={formData.name}
-            className='p-2 w-full'
-          />
-        </li>
-        <li>
-          <button
-            onClick={onSubmit}
-            className='w-full text-green-500 hover:border-green-500'
-          >
-            Register new activity
-          </button>
-        </li>
-        <li>
-          <Link to='/mainpanel'>
-            <button className='w-full my-8'>{'< '}Go back</button>
-          </Link>
-        </li>
       </ul>
+      <button
+        onClick={onSubmit}
+        className='w-full text-green-500 hover:border-green-500'
+      >
+        Edit
+      </button>
+      <div>
+        <Link to='/mainpanel'>
+          <button className='w-full my-8'>{'< '}Go back</button>
+        </Link>
+      </div>
     </div>
   )
 }
 
-export default Addactivities
+export default EditActivity

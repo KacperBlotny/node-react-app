@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import axios from 'axios'
@@ -41,33 +41,34 @@ function Login() {
   }
   return (
     <div>
-      <div>Login into System</div>
+      <h2>Login into System</h2>
       <ul>
-        <li className='p-4'>
+        <li className='py-2'>
           <input
             type='email'
             placeholder='Email'
             id='email'
             onChange={onChange}
             value={formData.email}
+            className='p-2'
           />
         </li>
-        <li className='p-4'>
+        <li className='py-2'>
           <input
             type='password'
             placeholder='Haslo'
             id='password'
             onChange={onChange}
             value={formData.password}
+            className='p-2'
           />
         </li>
         <li>
-          <button onClick={onSubmit}>Wyslij</button>
+          <button onClick={onSubmit} className='w-full'>
+            Log in
+          </button>
         </li>
       </ul>
-      <Link to='/mainpanel'>
-        <button className='p-2 m-4'>Log in</button>
-      </Link>
     </div>
   )
 }

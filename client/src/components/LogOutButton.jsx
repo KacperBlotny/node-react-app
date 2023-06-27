@@ -3,13 +3,17 @@ import { useContext } from 'react'
 import { UserContext } from '../../UserContext'
 
 function LogOutButton() {
-  const { value, setValue } = useContext(UserContext)
+  const { setValue } = useContext(UserContext)
+
   return (
     <div>
       <Link to='/login'>
         <button
           className='p-2 m-4'
-          onClick={() => setValue({ name: 'Please log in' })}
+          onClick={() => {
+            localStorage.setItem('token', '')
+            setValue({ name: 'Please log in' })
+          }}
         >
           Log out
         </button>
