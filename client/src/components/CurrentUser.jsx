@@ -1,18 +1,18 @@
-import { useContext } from 'react'
-import { Link } from 'react-router-dom'
-import { UserContext } from '../../UserContext'
+import { useContext } from "react";
+import { Link } from "react-router-dom";
+import { UserContext } from "../../UserContext";
 // import axios from 'axios'
 
 function CurrentUser() {
-  const { value, setValue } = useContext(UserContext)
-  const token = localStorage.getItem('token') || null
-  console.log(token)
+  const { value, setValue } = useContext(UserContext);
+  const token = localStorage.getItem("token") || null;
+  console.log(token);
 
-  let showInfo
-  if (value.name == 'Please log in') {
-    showInfo = false
+  let showInfo;
+  if (value.name == "Please log in") {
+    showInfo = false;
   } else {
-    showInfo = true
+    showInfo = true;
   }
 
   // const [fetchedMe, setFetchedMe] = useState([])
@@ -33,23 +33,30 @@ function CurrentUser() {
   // }, [])
 
   return (
-    <div className='fixed top-0 w-screen'>
-      <div className='text-x p-8'>
+    <div className="fixed top-0 w-screen">
+      <div className="text-x p-8">
         <ul>
-          <li className='flex'>
-            {' '}
-            <span style={{ display: showInfo ? 'block' : 'none' }}>
-              User:{' '}
-            </span>{' '}
-            <span className='text-indigo-600 px-2'>{value.name}</span>
+          <li className="flex">
+            {" "}
+            <span style={{ display: showInfo ? "block" : "none" }}>
+              User:{" "}
+            </span>{" "}
+            <span className="text-indigo-600 px-2">{value.name}</span>
           </li>
-          <li style={{ display: showInfo ? 'block' : 'none' }}>
-            <Link to='/login'>
+          <li className="flex">
+            {" "}
+            <span style={{ display: showInfo ? "block" : "none" }}>
+              Role:{" "}
+            </span>{" "}
+            <span className="text-indigo-600 px-2">{value.role}</span>
+          </li>
+          <li style={{ display: showInfo ? "block" : "none" }}>
+            <Link to="/login">
               <p
-                className=' my-2 text-xs text-gray-500 hover:text-white'
+                className=" my-2 text-xs text-gray-500 hover:text-white"
                 onClick={() => {
-                  localStorage.setItem('token', '')
-                  setValue({ name: 'Please log in' })
+                  localStorage.setItem("token", "");
+                  setValue({ name: "Please log in" });
                 }}
               >
                 Change user
@@ -60,7 +67,7 @@ function CurrentUser() {
       </div>
       <div></div>
     </div>
-  )
+  );
 }
 
-export default CurrentUser
+export default CurrentUser;

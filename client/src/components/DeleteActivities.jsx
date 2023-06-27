@@ -1,71 +1,70 @@
-import { Link } from 'react-router-dom'
-import { useState } from 'react'
-import axios from 'axios'
+import { Link } from "react-router-dom";
+import { useState } from "react";
+import axios from "axios";
 
 function DeleteActivities() {
-  const token = localStorage.getItem('token') || null
+  const token = localStorage.getItem("token") || null;
 
   const [formData, setFormData] = useState({
-    activityid: '',
-  })
+    activityid: "",
+  });
 
   const onChange = (e) => {
     setFormData((prevState) => ({
       ...prevState,
       [e.target.id]: e.target.value,
-    }))
-  }
+    }));
+  };
 
   const onSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
-      console.log(formData)
-      console.log(token)
+      console.log(formData);
+      console.log(token);
       const response = await axios.delete(
-        'http://localhost:4001/api/activities',
-        formData,
-        {
-          config: {
-            headers: {
-              authorization: 'Bearer ' + token,
-            },
-          },
-        }
-      )
+        "http://localhost:4001/api/activities",
 
-      console.log(response.data)
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+          data: formData,
+        }
+      );
+
+      console.log(response.data);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
   return (
     <>
-      <div className='w-1/5'>
+      <div className="w-1/5">
         <div>Delete activity</div>
-        <div className='py-2'>
+        <div className="py-2">
           <input
-            type='text'
-            placeholder='Input activity id'
-            id='activityid'
+            type="text"
+            placeholder="Input activity id"
+            id="activityid"
             onChange={onChange}
             value={formData.activityid}
-            className='p-2 w-full'
+            className="p-2 w-full"
           />
         </div>
         <button
           onClick={onSubmit}
-          className='w-full text-rose-500 hover:border-rose-500'
+          className="w-full text-rose-500 hover:border-rose-500"
         >
           Delete activity
         </button>
         <div>
-          <Link to='/'>
-            <button className='w-full my-8'>{'< '}Go back</button>
+          <Link to="/">
+            <button className="w-full my-8">{"< "}Go back</button>
           </Link>
         </div>
       </div>
     </>
-  )
+  );
 }
 
-export default DeleteActivities
+export default DeleteActivities;
