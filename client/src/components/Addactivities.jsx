@@ -1,5 +1,9 @@
 import { Link } from 'react-router-dom'
 // import { useNavigate } from 'react-router-dom'
+import DateTimePicker from 'react-datetime-picker'
+import 'react-datetime-picker/dist/DateTimePicker.css'
+import 'react-calendar/dist/Calendar.css'
+import 'react-clock/dist/Clock.css'
 import { useState } from 'react'
 import axios from 'axios'
 
@@ -9,8 +13,8 @@ function Addactivities() {
 
   const [formData, setFormData] = useState({
     userid: '',
-    startTime: '',
-    endTime: '',
+    startTime: new Date(),
+    endTime: new Date(),
     name: '',
   })
 
@@ -60,26 +64,49 @@ function Addactivities() {
             className='p-2 w-full'
           />
         </li>
-        <li className='py-2'>
+        {/* <li className="py-2">
           <input
-            type='text'
-            placeholder='Start time'
-            id='startTime'
+            type="text"
+            placeholder="Start time"
+            id="startTime"
             onChange={onChange}
             value={formData.startTime}
-            className='p-2 w-full'
+            className="p-2 w-full"
+          />
+        </li> */}
+        <li className='py-2'>
+          <DateTimePicker
+            value={formData.startTime}
+            onChange={(date) =>
+              setFormData((prevState) => ({
+                ...prevState,
+                startTime: date,
+              }))
+            }
           />
         </li>
         <li className='py-2'>
-          <input
-            type='text'
-            placeholder='End Time'
-            id='endTime'
-            onChange={onChange}
+          <DateTimePicker
             value={formData.endTime}
-            className='p-2 w-full'
+            onChange={(date) =>
+              setFormData((prevState) => ({
+                ...prevState,
+                endTime: date,
+              }))
+            }
           />
         </li>
+
+        {/* <li className="py-2">
+          <input
+            type="text"
+            placeholder="End Time"
+            id="endTime"
+            onChange={onChange}
+            value={formData.endTime}
+            className="p-2 w-full"
+          />
+        </li> */}
         <li className='py-2'>
           <input
             type='text'

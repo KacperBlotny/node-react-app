@@ -1,58 +1,70 @@
-import { Link } from "react-router-dom";
-import { useContext } from "react";
-import { UserContext } from "../../UserContext";
+import { Link } from 'react-router-dom'
+import { useContext } from 'react'
+import { UserContext } from '../../UserContext'
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 // import { useState, useEffect } from 'react'
 // import axios from 'axios'
 
 function MainPanel() {
-  const { value } = useContext(UserContext);
+  const navigate = useNavigate()
+  const { value, setValue } = useContext(UserContext)
+  const role = localStorage.getItem('role')
+  setValue(role)
+
+  useEffect(() => {
+    if (value.name === 'Please log in') {
+      navigate('/')
+    }
+  }, [value])
+
   return (
     <div>
-      <div className="flex">
-        {value.role !== "employee" && (
+      <div className='flex'>
+        {value.role !== 'employee' && (
           <div>
             <h2>Users operations</h2>
             <ul>
               <li>
-                <Link to="/displayusers">Display users</Link>
+                <Link to='/displayusers'>Display users</Link>
               </li>
-              {value.role !== "manager" && (
+              {value.role !== 'manager' && (
                 <>
                   <li>
-                    <Link to="/register">Register</Link>
+                    <Link to='/register'>Register</Link>
                   </li>
 
                   <li>
-                    <Link to="/edituser">Edit User</Link>
+                    <Link to='/edituser'>Edit User</Link>
                   </li>
                   <li>
-                    <Link to="/deleteuser">Delete User</Link>
+                    <Link to='/deleteuser'>Delete User</Link>
                   </li>
                 </>
               )}
             </ul>
           </div>
         )}
-        <div className="px-16">
+        <div className='px-16'>
           <h2>Activities operations</h2>
           <ul>
-            {" "}
-            {value.role !== "employee" && (
+            {' '}
+            {value.role !== 'employee' && (
               <li>
-                <Link to="/activitiesdisplay">Display activities</Link>
+                <Link to='/activitiesdisplay'>Display activities</Link>
               </li>
             )}
             <li>
-              <Link to="/addactivities">Add activities</Link>
+              <Link to='/addactivities'>Add activities</Link>
             </li>
-            {value.role !== "employee" && (
+            {value.role !== 'employee' && (
               <>
                 <li>
-                  <Link to="/deleteactivities">Delete activities</Link>
+                  <Link to='/deleteactivities'>Delete activities</Link>
                 </li>
                 <li>
-                  <Link to="/editactivity">Edit activities</Link>
+                  <Link to='/editactivity'>Edit activities</Link>
                 </li>
               </>
             )}
@@ -60,7 +72,7 @@ function MainPanel() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default MainPanel;
+export default MainPanel

@@ -36,9 +36,8 @@ CREATE TABLE Activities (
   ActivityID SERIAL PRIMARY KEY,
   UserID INT,
 	name varchar(50),
-  Date DATE,
-  StartTime TIME,
-  EndTime TIME,
+  StartTime varchar,
+  EndTime varchar,
   FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
 

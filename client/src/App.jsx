@@ -20,7 +20,6 @@ import EditActivity from './components/EditActivity'
 
 function App() {
   const [value, setValue] = useState({ name: 'Please log in', role: '' })
-
   return (
     <Router>
       <UserContext.Provider value={{ value, setValue }}>

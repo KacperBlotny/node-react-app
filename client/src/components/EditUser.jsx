@@ -1,11 +1,17 @@
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import axios from 'axios'
 
 function EditUser() {
   const navigate = useNavigate()
   const token = localStorage.getItem('token')
+  const role = localStorage.getItem('role')
+  useEffect(() => {
+    if (role != 'CEO') {
+      navigate('/')
+    }
+  }, [])
 
   const [formData, setFormData] = useState({
     userid: '',

@@ -1,9 +1,22 @@
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import DateTimePicker from 'react-datetime-picker'
+import 'react-datetime-picker/dist/DateTimePicker.css'
+import 'react-calendar/dist/Calendar.css'
+import 'react-clock/dist/Clock.css'
 
 function EditActivity() {
+  const navigate = useNavigate()
   const token = localStorage.getItem('token')
+  const role = localStorage.getItem('role')
+
+  useEffect(() => {
+    if (role === 'employee') {
+      navigate('/')
+    }
+  }, [])
 
   const [formData, setFormData] = useState({
     userid: '',
@@ -72,24 +85,46 @@ function EditActivity() {
             className='p-2 w-full'
           />
         </li>
-        <li className='py-2'>
+        {/* <li className="py-2">
           <input
-            type='text'
-            placeholder='Start Time'
-            id='startTime'
+            type="text"
+            placeholder="Start Time"
+            id="startTime"
             onChange={onChange}
             value={formData.startTime}
-            className='p-2 w-full'
+            className="p-2 w-full"
+          />
+        </li>
+        <li className="py-2">
+          <input
+            type="text"
+            placeholder="End time"
+            id="endTime"
+            onChange={onChange}
+            value={formData.endTime}
+            className="p-2 w-full"
+          />
+        </li> */}
+        <li className='py-2'>
+          <DateTimePicker
+            value={formData.startTime}
+            onChange={(date) =>
+              setFormData((prevState) => ({
+                ...prevState,
+                startTime: date,
+              }))
+            }
           />
         </li>
         <li className='py-2'>
-          <input
-            type='text'
-            placeholder='End time'
-            id='endTime'
-            onChange={onChange}
+          <DateTimePicker
             value={formData.endTime}
-            className='p-2 w-full'
+            onChange={(date) =>
+              setFormData((prevState) => ({
+                ...prevState,
+                endTime: date,
+              }))
+            }
           />
         </li>
       </ul>
